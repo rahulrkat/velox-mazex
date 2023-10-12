@@ -17,3 +17,7 @@ https://www.instructables.com/Line-Follower-Robot-PID-Control-Android-Setup/
 https://medium.com/@minikiraniamayadharmasiri/micromouse-from-scratch-algorithm-maze-traversal-shortest-path-floodfill-741242e8510
 
 https://www.instructables.com/Maze-Solver-Robot-Using-Artificial-Intelligence-Wi/
+
+https://github.com/ahadik/micromau5_code
+
+http://www.123seminarsonly.com/Seminar-Reports/038/59360985-Maze-Solving-Algorithms.pdf

@@ -1,16 +1,16 @@
 # velox-mazex
-MazeX - Team Velox
+**MazeX - Team Velox**
 
 To find the shortest path by solving a maze. 
 
-Algorithms:
+**Algorithms:**
 
 Left Hand on the Wall (Following the left wall always, but can get stuck in a loop)
 
 Flood Fill algorithm
 
 
-Resources:
+**Resources:**
 
 https://www.instructables.com/Line-Follower-Robot-PID-Control-Android-Setup/
 

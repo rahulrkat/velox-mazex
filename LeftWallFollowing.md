@@ -71,3 +71,5 @@ if(Checkpoint){
 ```
 
 We can optimize this to go along the shortest path by replacing few substrings by a single char. For example, 'LBL' can be replaced by 'S'. I fell this algo has 2 main drawbacks. One being it maynot be able to find both the checkpoints, and might get stuck in a loop. Also, with 3 sensors it isnt capable of differentiating between a T junction and END OF MAZE. we can resolve this by using 4 IR sensors.
+
+**Not the exact implementation. Will vary, but this is the basic underlying idea.**

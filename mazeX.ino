@@ -1,3 +1,11 @@
+/* 
+
+      * * * * * --------------> placement of the ir sensors
+
+*/
+
+
+
 
 #define enA 9
 #define enB 10
@@ -14,8 +22,17 @@ LFSensor[2] = A2;
 LFSensor[3] = A3;
 LFSensor[4] = A4;
 
+//Path setup
+
+string path;
+int pathLength = 0;
+int pathIndex = 0;
+
 
 void setup() {
+
+  Serial.begin(9600);
+
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);
   pinMode(in1, OUTPUT);
@@ -35,6 +52,58 @@ void loop() {
     IRArr[i] = digitalRead(LFSensor[i]);
   }
 
+  checkPathRightWallFollow();
+
+
+}
+
+//Checking path function
+
+void checkPathRightWallFollow(){
+
+  //Straight path
+  if (!IRArr[0] && !IRArr[1] && IRArr[2] && !IRArr[3] && !IRArr[4])
+  {
+    path += 'S';
+    front();
+  }
+
+  //Dead End or End Of Maze
+  if (IRArr[0] && IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
+  {
+    
+    front();
+    if (IRArr[0] && IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
+    {
+      path += 'E';
+      stop(); //abhi isse code karna he
+    }
+    else{
+      path += 'R';
+      reverse();
+      checkPathRightWallFollow();
+    } 
+  }
+
+  //Left
+  if (IRArr[0] && IRArr[1] && IRArr[2] && !IRArr[3] && !IRArr[4])
+  {
+    path += 'L';
+    left();
+  }
+
+  //Right
+  if (!IRArr[0] && !IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
+  {
+    path += 'R';
+    right();
+  }
+
+  //
+  if (!IRArr[0] && !IRArr[1] && !IRArr[2] && !IRArr[3] && !IRArr[4])
+  {
+    reverse();
+  }
 
 }
 

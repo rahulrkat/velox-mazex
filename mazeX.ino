@@ -2,6 +2,8 @@
 
       * * * * * --------------> placement of the ir sensors
 
+
+
 */
 
 
@@ -24,7 +26,8 @@ LFSensor[4] = A4;
 
 //Path setup
 
-string path;
+String path;
+
 int pathLength = 0;
 int pathIndex = 0;
 
@@ -59,49 +62,65 @@ void loop() {
 
 //Checking path function
 
-void checkPathRightWallFollow(){
+void checkPathLeftWallFollow(){
 
   //Straight path
   if (!IRArr[0] && !IRArr[1] && IRArr[2] && !IRArr[3] && !IRArr[4])
   {
+    Serial.println("Move FORWARD");
     path += 'S';
     front();
   }
 
-  //Dead End or End Of Maze
+  //Dead End(V2) or End Of Maze or '+' Instersection
   if (IRArr[0] && IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
   {
-    
+    // left();
     front();
     if (IRArr[0] && IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
     {
+      Serial.println("END OF MAZE");
       path += 'E';
-      stop(); //abhi isse code karna he
     }
     else{
-      path += 'R';
       reverse();
-      checkPathRightWallFollow();
-    } 
+      frontf();
+      right();
+      path += 'L';
+      Serial.println("Intersection : Move LEFT");
+    }
   }
 
   //Left
   if (IRArr[0] && IRArr[1] && IRArr[2] && !IRArr[3] && !IRArr[4])
   {
+    Serial.println("Turn LEFT");
     path += 'L';
     left();
   }
 
-  //Right
+  //Right or Right T
   if (!IRArr[0] && !IRArr[1] && IRArr[2] && IRArr[3] && IRArr[4])
   {
-    path += 'R';
-    right();
+    // Serial.println("Turn Right");
+    // path += 'R';
+    // right();
+    front();
+    if (!IRArr[0] && !IRArr[1] && !IRArr[2] && !IRArr[3] && !IRArr[4])
+    {
+      reverse();
+      front();
+      left();
+      path += 'R';
+    }
+    else path += 'S';
   }
 
-  //
+  //Dead End(V1)
   if (!IRArr[0] && !IRArr[1] && !IRArr[2] && !IRArr[3] && !IRArr[4])
   {
+    Serial.println("Dead end/REVERSE");
+    path += 'B';
     reverse();
   }
 
@@ -142,4 +161,17 @@ void stop(){
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
   delay(10000);
+  //call path.indexOf function 
+}
+
+
+String shortPath(){
+  path.replace("LBL","S");
+  path.replace("LBS","R");
+  path.replace("RBL","B");
+  path.replace("SBS","B");
+  path.replace("SBL","R");
+  path.replace("LBR","B");
+
+  return path;
 }

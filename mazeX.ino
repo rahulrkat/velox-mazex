@@ -9,12 +9,17 @@
 
 
 
-#define enA 9
-#define enB 10
-#define in1 6 //left motor
-#define in3 7 //right motor
-#define noOfIR 5
-#define motorSpeed 100
+// Motor A connections
+int enA = 9;
+int in1 = 8;
+int in2 = 7;
+// Motor B connections
+int enB = 3;
+int in3 = 5;
+int in4 = 4;
+
+int noOfIR 5
+int motorSpeed 100
 
 int IRArr[noOfIR] = {0}, LFSens[noOfIR];
 
@@ -40,6 +45,11 @@ void setup() {
   pinMode(enB, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in3, OUTPUT);
+
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
 
   for(int i = 0; i < noOfIR; i++){
     pinMode(LFSensor[i], INPUT);
@@ -84,7 +94,7 @@ void checkPathLeftWallFollow(){
     }
     else{
       reverse();
-      frontf();
+      front();
       right();
       path += 'L';
       Serial.println("Intersection : Move LEFT");
@@ -130,37 +140,66 @@ void checkPathLeftWallFollow(){
 
 void front(){
   digitalWrite(in1, HIGH);
-  digitalWrite(in2, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   delay(100);
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
 }
 
 void right(){
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
   delay(100);     //ye abhi pata nahi ki kitna delay rakhna he toh baadme editkarlenge
+
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
 }
 
 void left(){
-  digitalWrite(in1, HIGH);
+  digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
   delay(100);     //ye abhi pata nahi ki kitna delay rakhna he toh baadme editkarlenge
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
 }
 
-void reverse(){
-  right();
-  right();
-}
-
-void stop(){
+void reverse1(){
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  delay(100);
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+
+void reverse2(){
+  right();
+  right();
+}
+
+void stop2(){
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
   delay(10000);
+
+
   //call path.indexOf function 
 }
 

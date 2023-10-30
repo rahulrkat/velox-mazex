@@ -65,7 +65,7 @@ void loop() {
     IRArr[i] = digitalRead(LFSensor[i]);
   }
 
-  checkPathRightWallFollow();
+  checkPathLeftWallFollow();
 
 
 }

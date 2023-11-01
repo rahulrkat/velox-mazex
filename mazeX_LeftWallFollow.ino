@@ -38,6 +38,7 @@ void setup() {
   pinMode(in2, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   digitalWrite(in1, LOW);
   digitalWrite(in2, LOW);
@@ -196,6 +197,9 @@ void stop1(){
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);
   shortPath();
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
   dryRun = 1;
   delay(10000);
 

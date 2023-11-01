@@ -201,9 +201,8 @@ void stop1(){
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
   dryRun = 1;
+  Serial.println(path);
   delay(10000);
-
-
 
 
   //call path.indexOf function 

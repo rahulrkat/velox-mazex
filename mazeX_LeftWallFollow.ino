@@ -7,8 +7,8 @@ int enB = 3;
 int in3 = 5;
 int in4 = 4;
 
-int noOfIR 5
-int motorSpeed 100
+int noOfIR 5;
+int motorSpeed 100;
 
 int IRArr[noOfIR] = {0}, LFSens[noOfIR];
 

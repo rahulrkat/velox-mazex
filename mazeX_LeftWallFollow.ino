@@ -20,7 +20,7 @@ LFSensor[4] = A4;
 
 //Path setup
 
-String path = "";
+String path;
 
 int dryRun = 0;
 
@@ -92,11 +92,11 @@ void checkPathLeftWallFollow(){
     {
       Serial.println("END OF MAZE");
       path += 'E';
+      stop1();
     }
     else{
-      reverse();
-      frontf();
-      right();
+      reverse1();
+      left();
       path += 'L';
       Serial.println("Intersection : Move LEFT");
     }
@@ -119,12 +119,14 @@ void checkPathLeftWallFollow(){
     front();
     if (!IRArr[0] && !IRArr[1] && !IRArr[2] && !IRArr[3] && !IRArr[4])
     {
-      reverse();
-      front();
-      left();
+      reverse1();
+      right();
       path += 'R';
     }
-    else path += 'S';
+    else{
+      front();
+      path += 'S';
+    }
   }
 
   //Dead End(V1)
@@ -132,7 +134,7 @@ void checkPathLeftWallFollow(){
   {
     Serial.println("Dead end/REVERSE");
     path += 'B';
-    reverse();
+    reverse2();
   }
 
 }
